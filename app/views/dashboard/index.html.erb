@@ -38,16 +38,19 @@
               <div class="mb-4">
                 <%= form_with(model: Task.new, local: true, class: "flex") do |f| %>
                   <%= f.text_field :title, placeholder: "Add a new task", class: "flex-grow p-2 border border-gray-300 rounded-l-md focus:ring-indigo-500 focus:border-indigo-500" %>
+                  <%= f.collection_select :category_id, current_user.categories, :id, :name, {prompt: "Select category"}, class: "p-2 border border-gray-300" %>
                   <%= f.submit "Add", class: "bg-indigo-600 text-white px-4 py-2 rounded-r-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
                 <% end %>
               </div>
               <ul>
                 <% current_user.tasks.each do |task| %>
                   <li class="flex items-center mb-2">
-                    <%= form_with(model: task, local: true, class: "flex items-center flex-grow") do |f| %>
-                      <%= f.check_box :completed, class: "mr-2 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
-                      <%= f.text_field :title, class: "flex-grow p-2 border-none focus:ring-0 #{'line-through text-gray-500' if task.completed}" %>
+                    <%= form_with(model: task, url: toggle_task_path(task), method: :patch, local: true, class: "flex items-center flex-grow") do |f| %>
+                      <%= f.check_box :completed, onchange: 'this.form.submit()', class: "mr-2 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
+                      <span class="<%= task.completed ? 'line-through text-gray-500' : '' %>"><%= task.title %></span>
                       <span class="ml-2 px-2 py-1 text-sm font-semibold rounded-full" style="background-color: <%= task.category.color %>; color: white;"><%= task.category.name %></span>
+                      <%= link_to 'Edit', edit_task_path(task), class: "ml-2 text-indigo-600 hover:text-indigo-900" %>
+                      <%= link_to 'Delete', task_path(task), method: :delete, data: { confirm: 'Are you sure?' }, class: "ml-2 text-red-600 hover:text-red-900" %>
                     <% end %>
                   </li>
                 <% end %>
