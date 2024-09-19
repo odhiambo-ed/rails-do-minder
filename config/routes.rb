@@ -2,13 +2,15 @@ Rails.application.routes.draw do
   # Root path (assuming you have a home controller with an index action)
   root 'home#index'
 
-  # Devise routes for user authentication
+  # Devise routes for user authentication with custom path
   devise_for :users, path: '', path_names: {
+    sign_up: 'register',
     sign_in: 'login',
     sign_out: 'logout',
-    sign_up: 'register'
+    password: 'password',
+    confirmation: 'verification'
   }
-
+  
   # Dashboard
   get 'dashboard', to: 'dashboard#index'
 
