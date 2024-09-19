@@ -1,12 +1,26 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Root path (assuming you have a home controller with an index action)
+  root 'home#index'
 
-  # Defines the root path route ("/")
-  root "home#index"
+  # Devise routes for user authentication
+  devise_for :users, path: '', path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    sign_up: 'register'
+  }
 
-  authenticate :user do
-    get 'dashboard', to: 'dashboard#index'
-    resources :tasks
+  # Dashboard
+  get 'dashboard', to: 'dashboard#index'
+
+  # Tasks routes
+  resources :tasks do
+    member do
+      patch :toggle
+    end
   end
+
+  # Categories routes
+  resources :categories
+
+  # Add any additional routes your application needs below this line
 end
