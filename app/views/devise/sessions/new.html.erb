@@ -9,6 +9,7 @@
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= f.error_notification %>
+        <%= f.hidden_field :redirect_to, value: dashboard_path %>
 
         <div class="mb-4">
           <%= f.label :username, class: "block text-sm font-medium text-gray-700" %>
