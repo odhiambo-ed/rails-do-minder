@@ -35,7 +35,10 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to dashboard_path, notice: 'Task was successfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to dashboard_path, notice: 'Task was successfully deleted.', status: :see_other }
+      format.json { head :no_content }
+    end
   end
 
   def toggle
