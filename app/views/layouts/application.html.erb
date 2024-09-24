@@ -9,6 +9,9 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "turbo", type: "module" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "toastr", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "toastr", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "toastr_custom", "data-turbo-track": "reload" %>
   </head>
 
   <body>
@@ -16,5 +19,6 @@
     <main class="container-fluid mx-auto px-5">
       <%= yield %>
     </main>
+    <%= render 'shared/flash_messages' %>
   </body>
 </html>
