@@ -15,6 +15,7 @@
           <%= f.label :username, class: "block text-sm font-medium text-gray-700" %>
           <%= f.input :username, required: false, autofocus: true, input_html: { autocomplete: "username", class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" }, label: false %>
         </div>
+        <%= f.hidden_field :redirect_to, value: dashboard_path %>
 
         <div class="mb-4">
           <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
