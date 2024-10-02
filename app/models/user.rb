@@ -4,5 +4,6 @@ class User < ApplicationRecord
   
   has_many :tasks
   has_many :categories
+  validates :username, presence: true, uniqueness: true
   # ... other associations and validations ...
 end

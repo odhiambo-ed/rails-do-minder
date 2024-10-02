@@ -1,0 +1,12 @@
+<% flash.each do |type, message| %>
+  <% type = 'success' if type == 'notice' %>
+  <% type = 'error' if type == 'alert' %>
+  <script>
+    toastr.<%= type %>('<%= message %>', '', {
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right',
+      timeOut: 5000
+    });
+  </script>
+<% end %>
