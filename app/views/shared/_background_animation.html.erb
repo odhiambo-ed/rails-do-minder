@@ -1,0 +1,11 @@
+<div class="absolute inset-0" data-controller="background-animation">
+  <div class="absolute inset-0 bg-indigo-100 opacity-30"></div>
+  <div class="absolute inset-0 bg-gray-900 opacity-20"></div>
+  <div class="absolute inset-0">
+    <% 20.times do %>
+      <div class="absolute bg-white rounded-full opacity-60" 
+           style="<%= "left: #{rand(100)}%; top: #{rand(100)}%; width: #{rand(10..50)}px; height: #{rand(10..50)}px;" %>"
+           data-background-animation-target="bubble"></div>
+    <% end %>
+  </div>
+</div>
